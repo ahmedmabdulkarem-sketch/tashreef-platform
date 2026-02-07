@@ -1,0 +1,29 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f8fafc; /* Slate-50 */
+  --foreground: #0f172a; /* Slate-900 */
+  
+  /* Brand Colors */
+  --color-towa-gold: #C5A572;
+  --color-towa-navy: #1e3a8a;
+  --color-towa-blue: #3b82f6;
+  
+  --font-tajawal: 'Tajawal', sans-serif;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  
+  --color-gold: var(--color-towa-gold);
+  --color-navy: var(--color-towa-navy);
+  
+  --font-sans: var(--font-tajawal);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-tajawal);
+}

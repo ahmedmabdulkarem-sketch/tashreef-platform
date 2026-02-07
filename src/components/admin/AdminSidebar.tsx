@@ -23,32 +23,40 @@ export default function AdminSidebar() {
     const pathname = usePathname();
 
     return (
-        <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-slate-900 px-6 pb-4 border-r border-slate-800">
-            <div className="flex h-16 shrink-0 items-center">
-                <h1 className="text-xl font-bold text-white tracking-wide">
-                    <span className="text-towa-gold">TASHREEF</span> ADMIN
-                </h1>
+        <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-slate-900 px-6 pb-4 border-r border-slate-800 shadow-xl">
+            {/* Brand Logo Area */}
+            <div className="flex h-20 shrink-0 items-center justify-center border-b border-slate-800/50 mb-2">
+                <div className="flex items-center gap-3">
+                    <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-towa-gold to-yellow-600 flex items-center justify-center shadow-lg shadow-yellow-900/20">
+                        <span className="text-white font-bold text-xl">T</span>
+                    </div>
+                    <h1 className="text-xl font-bold text-white tracking-wide">
+                        TASHREEF
+                    </h1>
+                </div>
             </div>
+
             <nav className="flex flex-1 flex-col">
                 <ul role="list" className="flex flex-1 flex-col gap-y-7">
                     <li>
+                        <div className="text-xs font-semibold leading-6 text-slate-400 mb-2 uppercase tracking-wider">Menu</div>
                         <ul role="list" className="-mx-2 space-y-1">
                             {navigation.map((item) => {
-                                const isActive = pathname === item.href;
+                                const isActive = pathname.startsWith(item.href) && (item.href !== '/admin' || pathname === '/admin');
                                 return (
                                     <li key={item.name}>
                                         <Link
                                             href={item.href}
                                             className={`
-                        group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold
+                        group flex gap-x-3 rounded-md p-3 text-sm leading-6 font-semibold transition-all duration-200
                         ${isActive
-                                                    ? "bg-slate-800 text-towa-gold"
-                                                    : "text-slate-400 hover:text-white hover:bg-slate-800"
+                                                    ? "bg-gradient-to-r from-towa-navy to-slate-800 text-towa-gold shadow-md border-l-4 border-towa-gold"
+                                                    : "text-slate-400 hover:text-white hover:bg-slate-800/50"
                                                 }
                       `}
                                         >
                                             <item.icon
-                                                className="h-6 w-6 shrink-0"
+                                                className={`h-5 w-5 shrink-0 transition-colors ${isActive ? 'text-towa-gold' : 'text-slate-500 group-hover:text-white'}`}
                                                 aria-hidden="true"
                                             />
                                             {item.name}
@@ -58,17 +66,22 @@ export default function AdminSidebar() {
                             })}
                         </ul>
                     </li>
+
                     <li className="mt-auto">
-                        <Link
-                            href="#"
-                            className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-slate-400 hover:bg-slate-800 hover:text-white"
-                        >
-                            <ArrowLeftOnRectangleIcon
-                                className="h-6 w-6 shrink-0"
-                                aria-hidden="true"
-                            />
-                            Sign out
-                        </Link>
+                        <div className="rounded-xl bg-slate-800/50 p-4 mb-4 border border-slate-700/50">
+                            <div className="flex items-center gap-3">
+                                <div className="h-10 w-10 rounded-full bg-slate-700 flex items-center justify-center text-white font-medium border border-slate-600">
+                                    AA
+                                </div>
+                                <div className="flex-1 min-w-0">
+                                    <p className="text-sm font-medium text-white truncate">Ahmed A.</p>
+                                    <p className="text-xs text-slate-400 truncate">Event Manager</p>
+                                </div>
+                                <button className="text-slate-400 hover:text-white">
+                                    <ArrowLeftOnRectangleIcon className="h-5 w-5" />
+                                </button>
+                            </div>
+                        </div>
                     </li>
                 </ul>
             </nav>
